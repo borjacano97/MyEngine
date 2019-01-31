@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core.h"
-
 namespace EDE 
 {
 	class EDE_API Application
@@ -15,12 +14,10 @@ namespace EDE
 		void run();
 		void stop();
 
-
 	private:
 		void release();
 	private:
 		bool running;
-
 
 	};
 

@@ -12,10 +12,12 @@ outputdir = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["ImGui"] = "EDE/vendor/imgui/"
 IncludeDir["Box2D"] = "EDE/vendor/Box2D/Box2D"
+IncludeDir["SDL2"] = "EDE/vendor/SDL2-2.0.9/include"
+
 
 include "EDE/vendor/Box2D"
 include "EDE/vendor/imgui"
- 
+
 project "EDE"
     location "EDE"
     kind "SharedLib"
@@ -38,13 +40,16 @@ project "EDE"
     {
         "%{prj.name}/src",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.Box2D}"
+        "%{IncludeDir.Box2D}",
+        "%{IncludeDir.SDL2}"
     }
 
     links
     {
         "ImGui",
-        "Box2D"
+        "Box2D",
+        "EDE/vendor/SDL2-2.0.9/x64/SDL2.lib",
+        "EDE/vendor/SDL2-2.0.9/x64/SDL2main.lib"
 	}
 
     filter "system:windows"
