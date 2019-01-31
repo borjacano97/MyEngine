@@ -7,9 +7,15 @@ workspace "EDE"
         "Distribution"
     }
 
-
 outputdir = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["ImGui"] = "EDE/vendor/imgui/"
+IncludeDir["Box2D"] = "EDE/vendor/Box2D/Box2D"
+
+include "EDE/vendor/Box2D"
+include "EDE/vendor/imgui"
+ 
 project "EDE"
     location "EDE"
     kind "SharedLib"
@@ -30,8 +36,16 @@ project "EDE"
 
     includedirs
     {
-        "EDE/src"
+        "%{prj.name}/src",
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.Box2D}"
     }
+
+    links
+    {
+        "ImGui",
+        "Box2D"
+	}
 
     filter "system:windows"
         cppdialect "C++17"
@@ -51,18 +65,19 @@ project "EDE"
 
     filter "configurations:Debug"
         defines "EDE_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "EDE_RELEASE"
+        buildoptions "/MD"
         optimize "On"
         
     filter "configurations:Distribution"
         defines "EDE_DISTRIBUTION"
+        buildoptions "/MD"
         optimize "On"
     
-    filter { "system:windows" , "configurations:Release"}
-        buildoptions "/MT"
 
 project "Sandbox"
     location "Sandbox"
@@ -86,6 +101,10 @@ project "Sandbox"
         "EDE/src"
     }
 
+    links
+    {
+       "EDE"
+    }
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
@@ -96,22 +115,19 @@ project "Sandbox"
             "EDE_PLATFORM_WINDOWS"
         }
 
-        links
-        {
-            "EDE"
-        }
+
 
     filter "configurations:Debug"
         defines "EDE_DEBUG"
+        buildoptions "/MD"
         symbols "On"
 
     filter "configurations:Release"
         defines "EDE_RELEASE"
+        buildoptions "/MD"
         optimize "On"
         
     filter "configurations:Distribution"
         defines "EDE_DISTRIBUTION"
+        buildoptions "/MD"
         optimize "On"
-    
-    filter { "system:windows" , "configurations:Release"}
-        buildoptions "/MT"
