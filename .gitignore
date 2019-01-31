@@ -34,3 +34,6 @@
 #Binary Folders
 bin
 bin-int
+
+#Visual studio
+.vs/
