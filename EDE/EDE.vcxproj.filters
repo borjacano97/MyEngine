@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="EDE">
+      <UniqueIdentifier>{73E1870B-DFEA-877C-6866-9E7CD46E937C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EDE.h" />
+    <ClInclude Include="src\EDE\Application.h">
+      <Filter>EDE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EDE\Core.h">
+      <Filter>EDE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EDE\EntryPoint.h">
+      <Filter>EDE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EDE\Application.cpp">
+      <Filter>EDE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdpch.cpp" />
+  </ItemGroup>
+</Project>
